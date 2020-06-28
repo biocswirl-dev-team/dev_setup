@@ -38,3 +38,6 @@ git clone https://github.com/biocswirl-dev-team/BiocTerm.git
 ./dev-biocterm.sh
 ```
 If you have issues launching, make sure you are in the repo directory and the script has the correct permissions to run (you can use chmod for this). 
+
+## Development workflow
+![](https://i.imgur.com/1L8WBer.png?raw=true)
