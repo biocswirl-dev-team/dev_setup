@@ -1,0 +1,36 @@
+name: Merge Checks
+
+on: 
+  push: 
+      branches: 
+          - master
+          - main 
+          - release
+   pull_request: 
+       branches: 
+          - '*' 
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+       
+        # test operating systems
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        r: [4.0.3, 3.6.3, 3.4.3] # r versions
+        experimental: [false]
+       
+        # exception cases 
+        include: 
+           - r: 2.15.0
+             experimental: [true]
+    
+    continue-on-error: ${{ matrix.experimental }}
+    name: MERGE-DEBUG 
+
+    runs-on: ${{ matrix.os }}
+
+    env: 
+        R_VERSION: ${{ matrix.r }}   
+
