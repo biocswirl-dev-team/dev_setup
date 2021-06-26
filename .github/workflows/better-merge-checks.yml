@@ -17,6 +17,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        R: [ '3.5.3', '3.6.1' ]
+    name: check_sample
     steps:
+    - uses: actions/checkout@v2
     - name: Get Directory
       run: ls ${{ github.workspace }}
+    - name: setup-r
+      uses: r-lib/actions/setup-r@v1
+      with: 
+        r-version: ${{ matrix.R }}
+    - run: Rscript -e 'print("hello")'
+        
+      
