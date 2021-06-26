@@ -13,7 +13,7 @@ Date: June 5, 2021
 - a method of development that involves automation at different stages of the development of an app or lesson in our case 
 
 - main concepts include "continuous integration, continuous delivery, and continuous deployment." 
- 
+
 - " "CI" in CI/CD always refers to continuous integration, which is an automation process for developers. Successful CI means new code changes to an app are regularly built, tested, and merged to a shared repository. " 
 
 ![image](https://www.redhat.com/cms/managed-files/ci-cd-flow-mobile_0.png)
@@ -48,6 +48,45 @@ Date: June 5, 2021
     - can be used to "build, test, package, release, or deploy a project on GitHub."
 - jobs= set of steps that are executed on the same runner
     - multiple jobs on 1 workflow
-    - usually run parallel, can be configured to run     
+    - usually run parallel, can be configured to run sequentially     
 
 -![parts of github actions](https://docs.github.com/assets/images/help/images/overview-actions-design.png)
+
+- steps= individual commands/tasks for a job
+
+  - either an action or a shell command
+
+  - each step runs on the same runner allowing jobs to share data
+
+- Actions: 
+
+  - standalone commands combined into steps to make a job
+  - smallest building blocks of a workflow 
+  - to use it must include it into a step
+
+- Runners
+
+  - server with the Github actions runner application installed 
+  - usually hosted by github, can host own
+  - runs each job on a fresh virtual environment, reports the progress, logs and other results on Github
+  - based on Ubuntu (Linux), Windows, macOS
+
+### Example Workflow File
+
+Store workflow files in a hidden 
+
+```yml
+name: learn-github-actions #name of the workflow that appears in Actions tab
+on: [push] # event that leads to a trigger
+jobs: # the start of a all the jobs grouped together 
+  check-bats-version: # name of job 
+    runs-on: ubuntu-latest # type of runner, fresh Ubuntu linux runner
+    steps: # steps in the check-bats version job 
+      - uses: actions/checkout@v2 # retrieve community action named checkout@v2
+      - uses: actions/setup-node@v1 # install the node package and use npm command
+      - run: npm install -g bats # use np to install bats 
+      - run: bats -v # run the bats command with parameter that outputs software version 
+```
+
+the `on: [push]`means that job runs every time a push event occurs so every time a change is pushed 
+
