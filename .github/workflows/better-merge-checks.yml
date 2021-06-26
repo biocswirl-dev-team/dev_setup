@@ -18,14 +18,5 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Check Commit Message
-      # You may pin to the exact commit or the version.
-      # uses: adityaa30/check-commit@f91bff86f4bc6e285e91ea60cba690713783ea44
-      uses: adityaa30/check-commit@v0.1
-      with:
-        # <scope> field will be compulsory inside commit header specify true or false. defaults to false
-
-        compulsory-scope: false
-        # Maximum length that the header should have defaults to 50
-
-        max-header-length: 50
+    - name: Get Directory
+      run: ls ${{ github.workspace }}
