@@ -20,16 +20,17 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, ubuntu-latest]
-        R: [ '3.5.3', '3.6.1' ]
+        R: [ '3.5.3', '3.6.3', '4.1.0' ]
     name: Environment Setup
     steps:
     - uses: actions/checkout@v2
     - name: Get Directory
       run: ls ${{ github.workspace }}
-    - name: Setup R 
+    - name: Setup R
       uses: r-lib/actions/setup-r@v1
       with: 
         r-version: ${{ matrix.R }}
-    - run: Rscript -e 'print("hello")'
+    - name: Install Dependencies
+    - run: Rscript -e 'install.packages(c("BiocManager", "swirlify", "swirl"))'
         
       
