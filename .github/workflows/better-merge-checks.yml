@@ -31,7 +31,5 @@ jobs:
       with: 
         r-version: ${{ matrix.R }}
     - run: Rscript -e 'print("hello")'
-    - name: Get Environment Info
-    - run: echo ${{ matrix.os }} && echo ${{ matrix.R }}
         
       
