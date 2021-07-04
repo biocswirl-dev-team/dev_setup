@@ -22,15 +22,31 @@ How can we automate all of the above to work seamlessly?
 ### tools 
 	- Docker, R CMD Check, github actions, docker image, testthat, jobs, etc. 
 
-## Job Structure
-### Job Requirements
-### Jobs needed
-	- R version Check 
-	- Operating System Check 
-	- File Directory check for install location 
-	- YAML lintr for lesson.yaml
+# Actions Workflows
+We currently have two workflows that are actively being maintained for the BiocSwirl project. 
+
+#### course-install.yaml
+Installs all courses using devtools, should avoid as many dependencies as possible to recreate user environment
+	- Main BiocSwirl repo only 
+	- Installs ALL courses on all operating systems and recent R versions 
+	- Tries to load each course appropriately 
+	- File Directory check for install location
+	- Attempts to install and uninstall course (checks for clean uninstall) 
+	- Logs install errors 
+	- Scheduled cron job (Once weekly) 
+Requirements: Devtools, R matrix, OS matrix, logging 
+
+#### course-checks.yaml
+Checks for the integrity of the swirl course during active development, should use as many dependencies as required to recreate dev environment
+	- Used on all individual course repos 
+	- load in course locally using swirl 
+	- scan for large files
+	- load dependencies 
+	- tests lessons (possible to log stalling for when data gets stuck on download?) 
+		- Testthat, r cmd check
 	- Check file structure integrity for swirl lessons/courses, also check for duplicates 
-	- Check for large files
-	  
+	- uses yaml linter for lesson.yaml
+	- uses R linter
+Requirements: R linter, Yaml linter, Bioconductor, swirl, swirlify, bash utils, etc.
 
 
