@@ -25,8 +25,9 @@ How can we automate all of the above to work seamlessly?
 # Actions Workflows
 We currently have two workflows that are actively being maintained for the BiocSwirl project. 
 
-#### course-install.yaml
+### course-install.yaml
 Installs all courses using devtools, should avoid as many dependencies as possible to recreate user environment
+
 	- Main BiocSwirl repo only 
 	- Installs ALL courses on all operating systems and recent R versions 
 	- Tries to load each course appropriately 
@@ -34,10 +35,12 @@ Installs all courses using devtools, should avoid as many dependencies as possib
 	- Attempts to install and uninstall course (checks for clean uninstall) 
 	- Logs install errors 
 	- Scheduled cron job (Once weekly) 
+	
 Requirements: Devtools, R matrix, OS matrix, logging 
 
-#### course-checks.yaml
+### course-checks.yaml
 Checks for the integrity of the swirl course during active development, should use as many dependencies as required to recreate dev environment
+
 	- Used on all individual course repos 
 	- load in course locally using swirl 
 	- scan for large files
@@ -47,6 +50,7 @@ Checks for the integrity of the swirl course during active development, should u
 	- Check file structure integrity for swirl lessons/courses, also check for duplicates 
 	- uses yaml linter for lesson.yaml
 	- uses R linter
+	
 Requirements: R linter, Yaml linter, Bioconductor, swirl, swirlify, bash utils, etc.
 
 
