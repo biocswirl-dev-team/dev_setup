@@ -31,9 +31,9 @@ jobs:
       with: 
         r-version: ${{ matrix.R }}
     - run: Rscript -e 'install.packages(c("remotes", "swirl"))'
-    - run: Rscript -e 'remotes::install_github("biocswirl-dev-team/BiocSwirl")'
-    - run: Rscript -e 'library(swirl)'
-    - run: Rscript -e 'library(BiocSwirl)'
-    - run: Rscript -e 'list_courses()'
+    #- run: Rscript -e 'remotes::install_github("biocswirl-dev-team/BiocSwirl")'
+    #- run: Rscript -e 'library(swirl)'
+    #- run: Rscript -e 'library(BiocSwirl)'
+   # - run: Rscript -e 'list_courses()'
 
         
