@@ -90,3 +90,33 @@ jobs: # the start of a all the jobs grouped together
 
 the `on: [push]`means that job runs every time a push event occurs so every time a change is pushed 
 
+![Workflow overview](https://docs.github.com/assets/images/help/images/overview-actions-event.png)
+
+
+
+### Additional Features: Variables and Scripts
+
+https://docs.github.com/en/actions/learn-github-actions/essential-features-of-github-actions
+
+
+
+#### Variables
+
+- You can set custom variables for each workflow run by setting these in YAML workflow file (see example from github docs below)
+
+````yml
+jobs:
+  example-job:
+      steps:
+        - name: Connect to PostgreSQL # name of step (optional)
+          run: node client.js
+          env:
+            POSTGRES_HOST: postgres
+            POSTGRES_PORT: 5432
+````
+
+ The `POSTGRES_HOST` and `POSTGRES_PORT` are custom variables 
+
+#### Scripts
+
+- To run scripts and shell commands use the `run` keyword  which 
