@@ -1,0 +1,37 @@
+# This is a basic workflow to help you get started with Actions
+
+name: install-checks
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, ubuntu-latest]
+        R: [ '3.5.3', '3.6.3', '4.1.0' ]
+    name: Environment Setup
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get Directory
+      run: ls ${{ github.workspace }}
+    - name: Setup BiocSwirl Dev using ${{ matrix.R }} on ${{ matrix.os }}
+      uses: r-lib/actions/setup-r@v1
+      with: 
+        r-version: ${{ matrix.R }}
+    - run: Rscript -e 'install.packages("remotes")'
+    - run: Rscript -e 'remotes::install_github("biocswirl-dev-team/BiocSwirl")'
+    - run: Rscript -e 'library(BiocSwirl)'
+
+        
